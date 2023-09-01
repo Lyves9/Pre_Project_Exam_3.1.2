@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>All users</title>
+  <style>
+    table th, table td {
+      padding: 5px;
+      border: 1px black double;
+      text-align: center
+    }
+  </style>
+</head>
+<body>
+<div style="font-weight: bold;">/ all user details</div>
+<h1>All users details:</h1>
+<table style = "border: 1px black double;">
+  <tr>
+    <th>Id</th>
+    <th>Name</th>
+    <th>Last Name</th>
+    <th>Email</th>
+    <th>Edit</th>
+    <th>Delete</th>
+  </tr>
+
+  <tr th:each="user : ${users}">
+    <td th:text="${user.id}">id</td>
+    <td th:text="${user.name}">name</td>
+    <td th:text="${user.lastName}">lastname</td>
+    <td th:text="${user.email}">email</td>
+    <td><form th:action="@{/{id}/edit(id=${user.id})}">
+      <input type="submit" value="Edit" style="padding: 5px 10px"/>
+    </form></td>
+    <td><form th:method="DELETE" th:action="@{delete/{id}(id=${user.id})}">
+      <input type="submit" value="Delete" style="padding: 5px 10px">
+    </form></td>
+  </tr>
+
+</table>
+<br>
+<form action="/new">
+  <button type="submit">Добавить</button>
+</form>
+
+<h1 style="font-size: 160px; background-image: linear-gradient(45deg, #ff0000, #00ff00, #0000ff, #ff00ff); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Здесь могла быть ваша реклама</h1>
+
+</body>
+</html>
